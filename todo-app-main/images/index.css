@@ -1,0 +1,216 @@
+:root {
+  --very-light-gray: hsl(0, 0%, 98%);
+  --very-dark-blue: hsl(235, 21%, 11%);
+  --very-dark-desaturated-blue: hsl(235, 24%, 19%);
+  --light-grayish-blue: hsl(234, 39%, 85%);
+  --light-grayish-blue-hover: hsl(236, 33%, 92%);
+  --dark-grayish-blue: hsl(234, 11%, 52%);
+  --very-dark-grayish-blue: hsl(233, 14%, 35%);
+  --very-dark-grayish-blue: hsl(237, 14%, 26%);
+  --bright-blue: hsl(220, 98%, 61%);
+  --check-background: hsl(192, 100%, 67%), hsl(280, 87%, 65%);
+  --bg-image: url(bg-mobile-dark.jpg);
+  --theme-changer: url(icon-sun.svg);
+  --spacer: 1em;
+  --timer: 300ms;
+}
+.light-theme {
+  --very-dark-blue: hsl(0, 0%, 98%);
+  --very-dark-desaturated-blue: hsl(0, 0%, 100%);
+  --light-grayish-blue: hsl(235, 21%, 11%);
+  --very-light-gray: hsl(236, 9%, 61%);
+  --dark-grayish-blue: hsl(236, 9%, 61%);
+  --bg-image: url(bg-mobile-light.jpg);
+  --theme-changer: url(icon-moon.svg);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: color var(--timer) linear, background-color var(--timer) linear, 
+              background-image var(--timer) linear, border-color var(--timer) linear;
+}
+img {
+  object-fit: contain;
+  display: block;
+}
+body {
+  font-family: "Josefin Sans", Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-size: 100% 250px;
+  background-color: var(--very-dark-blue);
+}
+main {
+  width: min(85%, 450px);
+  margin-top: 105px;
+  margin-inline: auto;
+}
+header, .new-todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header > img {
+  content: var(--theme-changer);
+}
+.todo-logo {
+  color: hsl(0, 0%, 100%);
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.new-todo {
+  background-color: var(--very-dark-desaturated-blue);
+  padding: calc(var(--spacer) * 0.8);
+  margin-block: calc(var(--spacer) * 2) var(--spacer);
+  border-radius: 5px;
+  gap: var(--spacer);
+  font-size: 1rem;
+}
+.new-todo > * {
+  appearance: none;
+  background-color: transparent;
+}
+.new-todo > button, .check-box {
+  width: min(7%, 20px);
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--dark-grayish-blue);
+  border-radius: 50%;
+}
+.new-todo > input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: calc(var(--spacer) * 0.2);
+  color: var(--light-grayish-blue);
+  font-family: "Josefin Sans", Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+}
+.new-todo > input::placeholder {
+  color: var(--very-light-gray);
+  font-size: 1rem;
+}
+.todos {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.todo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacer) * 1.4);
+  color: var(--light-grayish-blue);
+  background-color: var(--very-dark-desaturated-blue);
+  padding: calc(var(--spacer) * 0.8);
+  font-size: 1rem;
+}
+.todo ~ .todo, .todo-footer {
+  border-top: 1px solid var(--dark-grayish-blue);
+}
+.light-theme .todo ~ .todo, .light-theme .todo-footer {
+  border-color: hsl(0, 0%, 90%);
+}
+.check-box {
+  width: min(6%, 20px);
+  display: grid;
+  place-items: center;
+  transition: border-color 200ms linear;
+}
+.check-box:hover {
+  border-color: var(--bright-blue);
+}
+.check-box > img {
+  width: 60%;
+  visibility: hidden;
+}
+.check-box.completed {
+  background-image: linear-gradient(45deg , var(--check-background));
+  border: none;
+}
+.check-box.completed > img {
+  visibility: visible;
+}
+.check-box.completed ~ p {
+  text-decoration: 1px var(--dark-grayish-blue) line-through;
+  color: var(--dark-grayish-blue);
+}
+.todo > img {
+  position: absolute;
+  inset: 50% calc(var(--spacer) * 0.8) auto auto;
+  transform: translateY(-50%);
+  width: 4%;
+}
+.todo-footer, .todo-nav {
+  background-color: var(--very-dark-desaturated-blue);
+  padding: calc(var(--spacer) * 0.8);
+  color: var(--dark-grayish-blue);
+  display: none; 
+}
+.todo-footer {
+  align-items: center;
+  justify-content: space-between;
+}
+.todo-footer > ul {
+  display: none;
+}
+.todo-nav {
+  border-radius: 5px;
+  margin-top: var(--spacer);
+  display: block;
+}
+.todo-nav > ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.9rem;
+  list-style-type: none;
+}
+.nav-item-active {
+  color: var(--bright-blue);
+}
+#empty {
+  background-color: var(--very-dark-desaturated-blue);
+  padding: calc(var(--spacer) * 0.8);
+  display: none;
+} 
+#empty > p {
+  color: var(--dark-grayish-blue);
+}
+.reorder-text {
+  color: var(--dark-grayish-blue);
+  text-align: center;
+  margin-top: calc(var(--spacer) * 2.5);
+}
+.check-box, .todo > img, .new-todo > button, li, #clear-completed, header > img {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.attribution { 
+  font-size: 11px; 
+  text-align: center; 
+}
+.attribution a { 
+  color: hsl(228, 45%, 44%); 
+}
+@media screen and (min-width: 600px) {
+  body {
+    --bg-image: url(bg-desktop-dark.jpg);
+  }
+  .light-theme {
+    --bg-image: url(bg-desktop-light.jpg);
+  }
+  .todo-footer {
+    font-size: 0.9rem;
+  }
+  .todo-footer > ul {
+    list-style-type: none;
+    display: flex;
+    gap: calc(var(--spacer) * 1.5);
+  }
+  .todo-nav {
+    display: none;
+  }
+}
